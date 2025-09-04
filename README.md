@@ -1,84 +1,83 @@
 <div align="center">
-
-  <h1><code>wasm-pack-template</code></h1>
-
-  <strong>A template for kick starting a Rust and WebAssembly project using <a href="https://github.com/rustwasm/wasm-pack">wasm-pack</a>.</strong>
-
-  <p>
-    <a href="https://travis-ci.org/rustwasm/wasm-pack-template"><img src="https://img.shields.io/travis/rustwasm/wasm-pack-template.svg?style=flat-square" alt="Build Status" /></a>
-  </p>
-
-  <h3>
-    <a href="https://rustwasm.github.io/docs/wasm-pack/tutorials/npm-browser-packages/index.html">Tutorial</a>
-    <span> | </span>
-    <a href="https://discordapp.com/channels/442252698964721669/443151097398296587">Chat</a>
-  </h3>
-
-  <sub>Built with 🦀🕸 by <a href="https://rustwasm.github.io/">The Rust and WebAssembly Working Group</a></sub>
+  <h1><code>markdown-editor</code></h1>
+  <strong>一个基于 Rust + WASM + React + Vite + Tailwind v4 + shadcn/ui + Monaco Editor 的现代 Markdown 编辑器</strong>
+  <br />
+  <img src="https://img.shields.io/badge/wasm-bindgen-blue" alt="wasm-bindgen" />
+  <img src="https://img.shields.io/badge/tailwindcss-v4-blue" alt="tailwindcss v4" />
+  <img src="https://img.shields.io/badge/monaco--editor-0.52.2-blue" alt="monaco-editor" />
+  <img src="https://img.shields.io/badge/shadcn--ui-3.1.0-blue" alt="shadcn-ui" />
 </div>
 
-## About
+## 项目简介
 
-[**📚 Read this template tutorial! 📚**][template-docs]
+本项目是一个现代化的 Markdown 编辑器，支持实时预览、WASM 高性能渲染、邮件一键复制、丰富的样式和交互体验。
 
-This template is designed for compiling Rust libraries into WebAssembly and
-publishing the resulting package to NPM.
+**主要技术栈：**
+- Rust + wasm-bindgen + wasm-pack：核心 Markdown 渲染逻辑，极致性能
+- React 19 + Vite 7：现代前端开发体验
+- Tailwind CSS v4 + shadcn/ui：美观、可定制的 UI 体系
+- Monaco Editor：专业级代码/Markdown 编辑体验
 
-Be sure to check out [other `wasm-pack` tutorials online][tutorials] for other
-templates and usages of `wasm-pack`.
+## 快速开始
 
-[tutorials]: https://rustwasm.github.io/docs/wasm-pack/tutorials/index.html
-[template-docs]: https://rustwasm.github.io/docs/wasm-pack/tutorials/npm-browser-packages/index.html
+### 安装依赖
 
-## 🚴 Usage
-
-### 🐑 Use `cargo generate` to Clone this Template
-
-[Learn more about `cargo generate` here.](https://github.com/ashleygwilliams/cargo-generate)
-
-```
-cargo generate --git https://github.com/rustwasm/wasm-pack-template.git --name my-project
-cd my-project
+```bash
+pnpm install
 ```
 
-### 🛠️ Build with `wasm-pack build`
+### 启动开发环境
 
-```
-wasm-pack build
-```
-
-### 🔬 Test in Headless Browsers with `wasm-pack test`
-
-```
-wasm-pack test --headless --firefox
+```bash
+pnpm run dev
 ```
 
-### 🎁 Publish to NPM with `wasm-pack publish`
+### 构建 WASM 包
+
+```bash
+pnpm run build:lib
+```
+
+### 生产环境构建
+
+```bash
+pnpm run build
+```
+
+### 预览生产环境
+
+```bash
+pnpm run preview
+```
+
+## 主要特性
+
+- Markdown 实时编辑与预览，支持表格、任务列表、脚注等扩展
+- Rust + WASM 高性能渲染，极致流畅
+- 一键复制渲染结果到邮件，样式保持一致
+- 支持 Tailwind v4 + shadcn/ui 主题美化
+- Monaco Editor 编辑体验
+- 代码高亮、表格、引用、列表等丰富 Markdown 语法
+
+## 目录结构
 
 ```
-wasm-pack publish
+├── app/                # 前端 React 代码
+│   ├── components/     # 组件，包括 MarkdownEditor、MarkdownPreview 等
+│   ├── App.tsx         # 应用入口
+│   └── ...
+├── src/                # Rust 源码，核心 Markdown 渲染逻辑
+├── pkg/                # wasm-pack 生成的 WASM 包
+├── public/             # 静态资源
+├── tailwind.config.ts  # Tailwind 配置
+├── package.json        # 项目依赖与脚本
+└── ...
 ```
 
-## 🔋 Batteries Included
+## 许可证
 
-* [`wasm-bindgen`](https://github.com/rustwasm/wasm-bindgen) for communicating
-  between WebAssembly and JavaScript.
-* [`console_error_panic_hook`](https://github.com/rustwasm/console_error_panic_hook)
-  for logging panic messages to the developer console.
-* `LICENSE-APACHE` and `LICENSE-MIT`: most Rust projects are licensed this way, so these are included for you
+Apache License, Version 2.0 或 MIT License，任选其一。
 
-## License
+---
 
-Licensed under either of
-
-* Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
-* MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
-
-at your option.
-
-### Contribution
-
-Unless you explicitly state otherwise, any contribution intentionally
-submitted for inclusion in the work by you, as defined in the Apache-2.0
-license, shall be dual licensed as above, without any additional terms or
-conditions.
+如需二次开发或集成，欢迎提 issue 或 PR！
