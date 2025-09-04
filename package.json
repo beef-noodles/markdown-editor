@@ -9,7 +9,8 @@
     "build": "pnpm run build:lib && tsc -b && vite build",
     "lint": "oxlint .",
     "fix": "oxlint --fix ",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postinstall": "pre-commit install"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
