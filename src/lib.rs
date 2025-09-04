@@ -19,8 +19,6 @@ pub fn init() -> Result<(), wasm_bindgen::JsValue> {
 
 #[wasm_bindgen]
 pub fn render_markdown(md: &str) -> Result<JsString, wasm_bindgen::JsValue> {
-    console::log_1(&"rendering markdown".into());
-
     let mut options = Options::empty();
     options.insert(Options::ENABLE_STRIKETHROUGH);
     options.insert(Options::ENABLE_TABLES);
@@ -31,8 +29,6 @@ pub fn render_markdown(md: &str) -> Result<JsString, wasm_bindgen::JsValue> {
 
     let mut html_output = String::new();
     pulldown_cmark::html::push_html(&mut html_output, parser);
-
-    console::log_1(&"Finish render".into());
 
     Ok(JsString::from(html_output))
 }

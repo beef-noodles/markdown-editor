@@ -6,7 +6,7 @@ import pkg from '../pkg/markdown_editor.js';
 
 function App() {
   const [count, setCount] = useState(0)
-  pkg().then(editor => {
+  pkg.then(edtor => {
     editor.init();
   })
 

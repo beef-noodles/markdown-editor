@@ -1,0 +1,19 @@
+@layer components {
+  .markdown-body {
+    @apply max-w-none text-base leading-relaxed text-foreground px-4;
+  }
+  .markdown-body h1 { @apply font-bold mt-6 mb-2 text-4xl leading-tight text-foreground; }
+  .markdown-body h2 { @apply font-bold mt-6 mb-2 text-3xl leading-snug text-foreground; }
+  .markdown-body h3 { @apply font-bold mt-6 mb-2 text-2xl leading-snug text-foreground; }
+  .markdown-body h4 { @apply font-bold mt-6 mb-2 text-xl leading-snug text-foreground; }
+  .markdown-body h5 { @apply font-bold mt-6 mb-2 text-lg leading-snug text-foreground; }
+  .markdown-body h6 { @apply font-bold mt-6 mb-2 text-base leading-snug text-foreground; }
+  .markdown-body p { @apply my-4; }
+  .markdown-body ul { @apply pl-6 my-4 list-disc; }
+  .markdown-body ol { @apply pl-6 my-4 list-decimal; }
+  .markdown-body code { @apply px-1 py-0.5 rounded bg-muted text-sm font-mono; }
+  .markdown-body pre { @apply p-4 rounded bg-muted overflow-x-auto my-4; }
+  .markdown-body blockquote { @apply border-l-4 border-muted pl-4 italic text-muted-foreground my-4; }
+  .markdown-body table { @apply w-full border-collapse my-4; }
+  .markdown-body th, .markdown-body td { @apply border px-2 py-1; }
+}
