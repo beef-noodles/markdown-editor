@@ -1,6 +1,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { Button } from "./ui/button";
+import { renderMermaid } from '../lib/mermaid-render';
 interface Props {
   innerHTML: string
 }
@@ -9,9 +10,11 @@ export const MarkdownPreview = ({ innerHTML }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const [copied, setCopied] = useState(false);
 
+
   useEffect(() => {
     if (ref.current) {
       ref.current.innerHTML = innerHTML;
+      renderMermaid(ref.current);
     }
   }, [innerHTML]);
 
