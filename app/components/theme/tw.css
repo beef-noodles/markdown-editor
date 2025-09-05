@@ -3,8 +3,7 @@ article {
   font-family: 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.6;
   padding: 1em;
-  border-width: 16px 32px;
-  border-color: #003d4f;
+  border: 32px solid #003d4f;
 }
 
 h1 {

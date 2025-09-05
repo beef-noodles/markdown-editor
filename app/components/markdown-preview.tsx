@@ -26,12 +26,15 @@ export const MarkdownPreview = ({ innerHTML }: Props) => {
 
   const handleCopy = async () => {
     if (ref.current) {
-      console.log('Copying HTML:', new Blob([ref.current.innerHTML], { type: 'text/html' }));
+      const articleHTML = ref.current.innerHTML;
+      const styledContent = inlineTheme(articleHTML, twTheme);
+
       await navigator.clipboard.write([
         new window.ClipboardItem({
-          'text/html': new Blob([ref.current.innerHTML], { type: 'text/html' }),
+          'text/html': new Blob([styledContent], { type: 'text/html' }),
         })
       ]);
+
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     }
