@@ -1,7 +1,7 @@
 mod utils;
 
 use js_sys::JsString;
-use pulldown_cmark::{Options, Parser};
+use markdown::{CompileOptions, Options, ParseOptions};
 use wasm_bindgen::prelude::*;
 use web_sys::console;
 
@@ -19,16 +19,24 @@ pub fn init() -> Result<(), wasm_bindgen::JsValue> {
 
 #[wasm_bindgen]
 pub fn render_markdown(md: &str) -> Result<JsString, wasm_bindgen::JsValue> {
-    let mut options = Options::empty();
-    options.insert(Options::ENABLE_STRIKETHROUGH);
-    options.insert(Options::ENABLE_TABLES);
-    options.insert(Options::ENABLE_FOOTNOTES);
-    options.insert(Options::ENABLE_TASKLISTS);
+    let html_output = markdown::to_html_with_options(
+        md,
+        &Options {
+            parse: ParseOptions {
+                constructs: markdown::Constructs::gfm(),
+                ..ParseOptions::default()
+            },
+            compile: CompileOptions {
+                allow_dangerous_html: true,
+                allow_dangerous_protocol: true,
+                ..CompileOptions::default()
+            },
+        },
+    );
 
-    let parser = Parser::new_ext(md, options);
-
-    let mut html_output = String::new();
-    pulldown_cmark::html::push_html(&mut html_output, parser);
-
-    Ok(JsString::from(html_output))
+    Ok(JsString::from(
+        html_output
+            .map_err(|err| JsValue::from_str(&err.to_string()))?
+            .as_str(),
+    ))
 }
