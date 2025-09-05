@@ -1,3 +1,5 @@
+import { REFERENCE_TITLE } from "@/constants/config";
+
 export function appendReferencesSection(input: HTMLElement | string): HTMLElement | string | void {
   if (!input) return;
 
@@ -33,7 +35,9 @@ export function appendReferencesSection(input: HTMLElement | string): HTMLElemen
     }
   }
 
-  if (referencesMap.size === 0) return;
+  if (referencesMap.size === 0) {
+    return isStringInput ? (root.innerHTML) : root;
+  }
 
   const hrefToIndex = new Map<string, number>();
   let runningIndex = 1;
@@ -57,7 +61,7 @@ export function appendReferencesSection(input: HTMLElement | string): HTMLElemen
 
 
   const heading = document.createElement('h2');
-  heading.textContent = '参考';
+  heading.textContent = REFERENCE_TITLE;
 
   section.appendChild(heading);
 

@@ -9,6 +9,8 @@ mermaid.initialize({
 
 const FAILED_TO_RENDER = `<pre style='color:red'>Failed to render Mermaid\n</pre>`;
 
+const errorLog = (e: Error) => { console.error('Mermaid render error:', e); }
+
 export async function renderMermaid(element: HTMLElement) {
   const preBlocks = Array.from(element.querySelectorAll('pre > code.language-mermaid'));
   for (const [i, codeBlock] of preBlocks.entries()) {
@@ -17,7 +19,7 @@ export async function renderMermaid(element: HTMLElement) {
     if (pre.nextElementSibling && pre.nextElementSibling.classList.contains('mermaid')) continue;
     const code = codeBlock.textContent || '';
     const container = document.createElement('div');
-    container.className = 'mermaid my-4 w-full overflow-x-auto';
+    container.className = 'mermaid';
     container.id = `mermaid-svg-${i}-${Date.now()}`;
     try {
       const { svg } = await mermaid.render(container.id, code);
@@ -26,6 +28,7 @@ export async function renderMermaid(element: HTMLElement) {
     } catch (e) {
       container.innerHTML = FAILED_TO_RENDER;
       pre.parentElement?.replaceChild(container, pre);
+      errorLog(e as Error);
     }
   }
 
@@ -35,7 +38,7 @@ export async function renderMermaid(element: HTMLElement) {
     if (block.parentElement?.querySelector('.mermaid')) continue;
     const code = block.textContent || '';
     const container = document.createElement('div');
-    container.className = 'mermaid my-4 w-full overflow-x-auto';
+    container.className = 'mermaid';
     container.id = `mermaid-svg-other-${i}-${Date.now()}`;
     block.parentElement?.replaceWith(container);
     try {
@@ -43,6 +46,7 @@ export async function renderMermaid(element: HTMLElement) {
       container.innerHTML = svg;
     } catch (e) {
       container.innerHTML = FAILED_TO_RENDER;
+      errorLog(e as Error);
     }
   }
 }
