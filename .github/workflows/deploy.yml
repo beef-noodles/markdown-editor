@@ -28,13 +28,17 @@ jobs:
           node-version: 'lts/*'
       - name: Install pnpm
         run: npm install -g pnpm
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - name: Install wasm-pack
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 
       - name: Install dependencies
         run: pnpm install --ignore-scripts
       - uses: actions/setup-python@v3
       - uses: pre-commit/action@v3.0.1
-      - name: Run pre-commit checks
-        run: pnpm run lint:all
   build:
     needs: check
     runs-on: ubuntu-latest
@@ -50,6 +54,14 @@ jobs:
         run: npm install -g pnpm
       - name: Install dependencies
         run: pnpm install --ignore-scripts
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - name: Install wasm-pack
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 
       - name: Build
         run: npm run build
