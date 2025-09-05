@@ -3,7 +3,7 @@ article {
   font-family: 'Helvetica Neue', Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
-  padding: 1em;
+  padding: 16px;
   border: 32px solid #003d4f;
 }
 
@@ -90,10 +90,10 @@ blockquote {
   border-left: 4px solid #6b9e78;
   color: #666666;
   font-size: 16px;
-  padding-left: 1em;
-  margin: 1em 0;
+  padding-left: 16px;
+  margin: 16px 0;
   background-color: #edf1f3;
-  padding: 0.5em 1em;
+  padding: 0.5em 16px;
 }
 
 ul {
@@ -180,7 +180,7 @@ code {
 
 pre {
   background-color: #edf1f3;
-  padding: 1em;
+  padding: 16px;
   border-radius: 5px;
   overflow-x: auto;
   margin: 16px 0;
