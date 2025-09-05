@@ -17,9 +17,8 @@ pub fn init() -> Result<(), wasm_bindgen::JsValue> {
     Ok(())
 }
 
-#[wasm_bindgen]
-pub fn render_markdown(md: &str) -> Result<JsString, wasm_bindgen::JsValue> {
-    let html_output = markdown::to_html_with_options(
+fn _render_markdown(md: &str) -> Result<String, String> {
+    markdown::to_html_with_options(
         md,
         &Options {
             parse: ParseOptions {
@@ -32,11 +31,49 @@ pub fn render_markdown(md: &str) -> Result<JsString, wasm_bindgen::JsValue> {
                 ..CompileOptions::default()
             },
         },
-    );
+    )
+    .map_err(|err| err.to_string())
+}
 
-    Ok(JsString::from(
-        html_output
-            .map_err(|err| JsValue::from_str(&err.to_string()))?
-            .as_str(),
-    ))
+#[wasm_bindgen]
+pub fn render_markdown(md: &str) -> Result<JsString, wasm_bindgen::JsValue> {
+    let html_output = _render_markdown(md)?;
+    Ok(JsString::from(html_output.as_str()))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_render_markdown_heading() {
+        let md = "# Hello";
+        let result = _render_markdown(md).unwrap();
+        let expected = "<h1>Hello</h1>";
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_render_markdown_strikethrough() {
+        let md = "~~world~~";
+        let result = _render_markdown(md).unwrap();
+        let expected = "<p><del>world</del></p>";
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_render_markdown_empty() {
+        let md = "";
+        let result = _render_markdown(md).unwrap();
+        let expected = "";
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_render_markdown_paragraph() {
+        let md = "This is a paragraph.";
+        let result = _render_markdown(md).unwrap();
+        let expected = "<p>This is a paragraph.</p>";
+        assert_eq!(result, expected);
+    }
 }

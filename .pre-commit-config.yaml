@@ -8,6 +8,12 @@ repos:
         entry: pnpm run lint
         language: system
         pass_filenames: true
+      - id: test_wasm
+        name: Rust check
+        entry: cargo test
+        language: system
+        pass_filenames: false
+
       - id: build
         name: build
         entry: pnpm run build
