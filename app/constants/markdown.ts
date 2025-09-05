@@ -71,5 +71,5 @@ flowchart LR
 
 ## Feedback
 
-Feel free to share your ideas and suggestions on [Github Issue](https://github.com/beef-noodles/markdown-editor). Your
+Feel free to share your ideas and suggestions on [GitHub Issue](https://github.com/beef-noodles/markdown-editor). Your
 feedback will make **Markdown Editor** better!`;

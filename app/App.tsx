@@ -4,7 +4,7 @@ import init, { render_markdown } from '../pkg/markdown_editor.js';
 import { MarkdownEditor } from './components/markdown-editor.js';
 import { MarkdownPreview } from './components/markdown-preview.js';
 import './App.css';
-import { DEFAULT_MARKDOWN } from './constants/markdown.js';
+import { DEFAULT_MARKDOWN } from './constants/markdown';
 
 
 function App() {
