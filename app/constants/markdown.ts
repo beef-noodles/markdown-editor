@@ -2,7 +2,7 @@ export const DEFAULT_MARKDOWN = `# Hello, Markdown Editor
 
 👋 Welcome to **Markdown Editor**! Nice to meet you!
 
-Just focus on creating your content, **Markdown Editor** will convert it to \`email\`, \`image\`, \`PDF\` and more.
+Just focus on creating your content, **Markdown Editor** will convert it to \`email\`.
 
 ## Quick Start
 
