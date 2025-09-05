@@ -1,7 +1,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { Button } from "./ui/button";
-import { toPng } from 'html-to-image';
+import { copyPreviewToClipboard, exportPreviewToPng } from '../lib/preview-utils';
 import { renderMermaid } from '../lib/mermaid-render';
 import { renderLatexInElement } from '../lib/latex-render';
 import { appendReferencesSection } from '../lib/references';
@@ -31,55 +31,17 @@ export const MarkdownPreview = ({ innerHTML }: Props) => {
   }, [innerHTML]);
 
   const handleCopy = async () => {
-    if (ref.current) {
-      renderLatexInElement(ref.current);
-      await renderMermaid(ref.current);
-
-      const articleHTML = ref.current.innerHTML;
-      const withReferences = appendReferencesSection(articleHTML) as string;
-      const styledContent = inlineTheme(withReferences, twTheme);
-
-      await navigator.clipboard.write([
-        new window.ClipboardItem({
-          'text/html': new Blob([styledContent], { type: 'text/html' }),
-          'text/plain': new Blob([ref.current.textContent || ''], { type: 'text/plain' })
-        })
-      ]);
-
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-    }
+    if (!ref.current) return;
+    await copyPreviewToClipboard(ref.current, twTheme);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
   };
 
   const handleExport = async () => {
     if (!ref.current) return;
     try {
       setExporting(true);
-      renderLatexInElement(ref.current);
-      await renderMermaid(ref.current);
-
-      const node = ref.current;
-      const article = node.querySelector('article') as HTMLElement | null;
-      const target = article ?? node;
-
-      const desiredWidth = 960;
-
-      const dataUrl = await toPng(target, {
-        width: desiredWidth,
-        style: {
-          width: `${desiredWidth}px`,
-          background: '#ffffff',
-          boxSizing: 'border-box',
-          display: 'block',
-          position: 'static',
-        },
-        backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--background') || '#ffffff',
-      });
-
-      const link = document.createElement('a');
-      link.download = `markdown-preview-${new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-')}.png`;
-      link.href = dataUrl;
-      link.click();
+      await exportPreviewToPng(ref.current);
     } catch (e) {
       console.error('Failed to export image', e);
     } finally {
