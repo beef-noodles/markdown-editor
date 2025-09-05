@@ -2,6 +2,9 @@
 import { useRef, useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { renderMermaid } from '../lib/mermaid-render';
+import inlineTheme from '../lib/inline-theme';
+import { highlightCode } from '../lib/highlight';
+import twTheme from './theme/tw.css?raw';
 interface Props {
   innerHTML: string
 }
@@ -13,17 +16,20 @@ export const MarkdownPreview = ({ innerHTML }: Props) => {
 
   useEffect(() => {
     if (ref.current) {
-      ref.current.innerHTML = innerHTML;
+      const articleHTML = `<article>${innerHTML}</article>`;
+      const highlightedContent = highlightCode(articleHTML);
+      const styledContent = inlineTheme(highlightedContent, twTheme);
+      ref.current.innerHTML = styledContent;
       renderMermaid(ref.current);
     }
   }, [innerHTML]);
 
   const handleCopy = async () => {
     if (ref.current) {
+      console.log('Copying HTML:', new Blob([ref.current.innerHTML], { type: 'text/html' }));
       await navigator.clipboard.write([
         new window.ClipboardItem({
           'text/html': new Blob([ref.current.innerHTML], { type: 'text/html' }),
-          'text/plain': new Blob([ref.current.innerText], { type: 'text/plain' })
         })
       ]);
       setCopied(true);
@@ -33,7 +39,8 @@ export const MarkdownPreview = ({ innerHTML }: Props) => {
 
   return (
     <>
-      <div className="relative w-1/2 h-full max-w-none overflow-y-auto markdown-body" ref={ref} />
+      <div className="relative w-1/2 h-full max-w-none overflow-y-auto markdown-body" ref={ref}>
+      </div>
       <Button
         onClick={handleCopy}
         className="fixed right-8 bottom-8 z-10 px-4 py-2 rounded bg-primary text-primary-foreground shadow-lg hover:bg-primary/80 transition-all"
