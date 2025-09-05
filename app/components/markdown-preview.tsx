@@ -49,7 +49,7 @@ export const MarkdownPreview = ({ innerHTML }: Props) => {
         className="fixed right-8 bottom-8 z-10 px-4 py-2 rounded bg-primary text-primary-foreground shadow-lg hover:bg-primary/80 transition-all"
         style={{ pointerEvents: 'auto' }}
       >
-        {copied ? '已复制' : '复制到邮件'}
+        {copied ? 'Copied' : 'Copy'}
       </Button>
     </>
 
