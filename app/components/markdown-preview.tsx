@@ -26,12 +26,15 @@ export const MarkdownPreview = ({ innerHTML }: Props) => {
 
   const handleCopy = async () => {
     if (ref.current) {
+      await renderMermaid(ref.current);
+
       const articleHTML = ref.current.innerHTML;
       const styledContent = inlineTheme(articleHTML, twTheme);
 
       await navigator.clipboard.write([
         new window.ClipboardItem({
           'text/html': new Blob([styledContent], { type: 'text/html' }),
+          'text/plain': new Blob([ref.current.textContent || ''], { type: 'text/plain' })
         })
       ]);
 

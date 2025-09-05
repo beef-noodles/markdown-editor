@@ -45,6 +45,11 @@ export default function inlineTheme(html: string, css: string): string {
       const elements = tempDiv.querySelectorAll(selector);
 
       elements.forEach((element) => {
+        // 跳过 Mermaid 图表内的元素
+        if (element.closest('.mermaid')) {
+          return;
+        }
+
         if (element instanceof HTMLElement) {
           Object.entries(styles).forEach(([property, value]) => {
             element.style.setProperty(property, value);

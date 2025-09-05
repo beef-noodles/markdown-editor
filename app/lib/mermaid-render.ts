@@ -2,7 +2,7 @@ import mermaid from "mermaid";
 
 mermaid.initialize({
   startOnLoad: false,
-  theme: 'default',
+  theme: "default",
   securityLevel: 'loose',
   maxTextSize: 50000
 });

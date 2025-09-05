@@ -4,10 +4,11 @@ import init, { render_markdown } from '../pkg/markdown_editor.js';
 import { MarkdownEditor } from './components/markdown-editor.js';
 import { MarkdownPreview } from './components/markdown-preview.js';
 import './App.css';
+import { DEFAULT_MARKDOWN } from './constants/markdown.js';
 
 
 function App() {
-  const [markdown, setMarkdown] = useState<string>("# Hello, Monaco Editor\n\nThis is a markdown editor.");
+  const [markdown, setMarkdown] = useState<string>(DEFAULT_MARKDOWN);
   const [innerHTML, setInnerHTML] = useState<string>('');
   const [wasmReady, setWasmReady] = useState(false);
 
