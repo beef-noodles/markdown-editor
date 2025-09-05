@@ -7,9 +7,8 @@ Just focus on creating your content, **Markdown Editor** will convert it to \`em
 ## Quick Start
 
 1. Write content: Enter Markdown text📝, paste images🏞️.
-2. Choose a theme: Pick a theme🎨 that suits your content.
-3. Copy content: Copy the formatted content with one click.
-4. Paste & Share: Paste it into emails, chat software, or anywhere else for quick sharing.
+2. Copy content: Copy the formatted content with one click.
+3. Paste & Share: Paste it into emails, chat software, or anywhere else for quick sharing.
 
 ![Preview](https://picsum.photos/600/300)
 
@@ -40,7 +39,7 @@ useEffect(() => {
   }, [markdown, wasmReady]);
 \`\`\`
 ## Features
-
+- ⚡️ **Fast:** Built with [WASM](https://webassembly.org/)
 - 💡 **Simple to Use:** Real-time preview, what you see is what you get.
 - 🏞️ **Image Upload:** Paste images, automatically generate image links.
 - 🧮 **Math Formula:** Support for [$LaTeX$](https://en.wikipedia.org/wiki/LaTeX) math formula.
