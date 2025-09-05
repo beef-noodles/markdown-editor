@@ -2,6 +2,7 @@
 import { useRef, useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { renderMermaid } from '../lib/mermaid-render';
+import { renderLatexInElement } from '../lib/latex-render';
 import inlineTheme from '../lib/inline-theme';
 import { highlightCode } from '../lib/highlight';
 import twTheme from './theme/tw.css?raw';
@@ -20,12 +21,14 @@ export const MarkdownPreview = ({ innerHTML }: Props) => {
       const highlightedContent = highlightCode(articleHTML);
       const styledContent = inlineTheme(highlightedContent, twTheme);
       ref.current.innerHTML = styledContent;
+      renderLatexInElement(ref.current);
       renderMermaid(ref.current);
     }
   }, [innerHTML]);
 
   const handleCopy = async () => {
     if (ref.current) {
+      renderLatexInElement(ref.current);
       await renderMermaid(ref.current);
 
       const articleHTML = ref.current.innerHTML;

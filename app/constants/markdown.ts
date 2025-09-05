@@ -43,7 +43,7 @@ useEffect(() => {
 
 - 💡 **Simple to Use:** Real-time preview, what you see is what you get.
 - 🏞️ **Image Upload:** Paste images, automatically generate image links.
-- 🧮 **Math Formula:** Support for $\\LaTeX$ math formula.
+- 🧮 **Math Formula:** Support for $\LaTeX$ math formula.
 - 📊 **Data Visualization:** Create beautiful flowcharts, sequence diagrams, and more with Mermaid syntax, making your data more vivid.
 - 🎨 **Multiple Themes:** Continuously updated to meet different layout needs.
 - 📧 **Quick Sharing:** One-click copy, ready to publish on multiple platforms.
