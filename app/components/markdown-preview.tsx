@@ -97,7 +97,7 @@ export const MarkdownPreview = ({ innerHTML }: Props) => {
           className="px-4 py-2 rounded bg-primary text-primary-foreground shadow-lg hover:bg-primary/80 transition-all"
           style={{ pointerEvents: 'auto' }}
         >
-          {copied ? 'Copied' : 'Copy'}
+          {copied ? 'Copied' : 'Copy to email'}
         </Button>
         <Button
           onClick={handleExport}
