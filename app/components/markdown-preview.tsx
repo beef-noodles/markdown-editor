@@ -3,6 +3,7 @@ import { useRef, useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { renderMermaid } from '../lib/mermaid-render';
 import { renderLatexInElement } from '../lib/latex-render';
+import { appendReferencesSection } from '../lib/references';
 import inlineTheme from '../lib/inline-theme';
 import { highlightCode } from '../lib/highlight';
 import twTheme from './theme/tw.css?raw';
@@ -19,7 +20,8 @@ export const MarkdownPreview = ({ innerHTML }: Props) => {
     if (ref.current) {
       const articleHTML = `<article>${innerHTML}</article>`;
       const highlightedContent = highlightCode(articleHTML);
-      const styledContent = inlineTheme(highlightedContent, twTheme);
+      const withReferences = appendReferencesSection(highlightedContent) as string;
+      const styledContent = inlineTheme(withReferences, twTheme);
       ref.current.innerHTML = styledContent;
       renderLatexInElement(ref.current);
       renderMermaid(ref.current);
@@ -32,7 +34,8 @@ export const MarkdownPreview = ({ innerHTML }: Props) => {
       await renderMermaid(ref.current);
 
       const articleHTML = ref.current.innerHTML;
-      const styledContent = inlineTheme(articleHTML, twTheme);
+      const withReferences = appendReferencesSection(articleHTML) as string;
+      const styledContent = inlineTheme(withReferences, twTheme);
 
       await navigator.clipboard.write([
         new window.ClipboardItem({
