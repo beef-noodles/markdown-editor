@@ -8,6 +8,17 @@ repos:
         entry: pnpm run lint
         language: system
         pass_filenames: true
+      - id: rust_fmt
+        name: Rust fmt
+        entry: cargo fmt
+        language: system
+        pass_filenames: false
+      - id: rust_check
+        name: Rust check
+        entry: cargo check
+        language: system
+        pass_filenames: false
+
       - id: test_wasm
         name: Rust check
         entry: cargo test
