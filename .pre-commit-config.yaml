@@ -4,29 +4,29 @@ repos:
   - repo: local
     hooks:
       - id: lint
-        name: lint
+        name: Lint
         entry: pnpm run lint
         language: system
         pass_filenames: true
       - id: rust_fmt
-        name: Rust fmt
+        name: Cargo fmt
         entry: cargo fmt
         language: system
         pass_filenames: false
       - id: rust_check
-        name: Rust check
+        name: Cargo check
         entry: cargo check
         language: system
         pass_filenames: false
 
       - id: test_wasm
-        name: Rust check
+        name: Cargo test
         entry: cargo test
         language: system
         pass_filenames: false
 
       - id: build
-        name: build
+        name: Build
         entry: pnpm run build
         language: system
         pass_filenames: false
