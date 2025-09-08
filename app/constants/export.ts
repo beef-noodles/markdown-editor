@@ -1,1 +1,1 @@
-export const TITLE = "Markdown Poster"
+export const TITLE = "Markdown Editor"

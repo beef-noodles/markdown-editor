@@ -2,7 +2,7 @@ export const DEFAULT_MARKDOWN = `# Hello, Markdown Editor
 
 👋 Welcome to **Markdown Editor**! Nice to meet you!
 
-Just focus on creating your content, **Markdown Editor** will convert it to \`email\`.
+Just focus on creating your content, **Markdown Editor** will convert it to \`email\` and \`image\`.
 
 ## Quick Start
 
@@ -20,7 +20,6 @@ Just focus on creating your content, **Markdown Editor** will convert it to \`em
 |-----------|----------------------------------------------------------|-----------------------------------|
 | 🖼️ Image | Generate shareable images from Markdown                  | Social media sharing              |
 | 📧 Email  | Create content that can be embedded directly into emails | Newsletters, article sharing      |
-| 📄 PDF    | PDF format for easy saving, sharing, and printing        | Document archiving, file transfer |
 
 
 \`\`\`ts
@@ -55,7 +54,7 @@ flowchart LR
     A[Write Markdown] -->|Real-time| B[Preview]
     B --> C{Export Options}
     C -->|Social Media| D[Twitter/LinkedIn]
-    C -->|Document| E[PDF]
+    C -->|Assert| E[Image]
     C -->|Web| F[HTML]
     C -->|Email| G[Newsletter]
 
