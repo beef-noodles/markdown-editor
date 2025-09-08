@@ -3,12 +3,39 @@ import { renderMermaid } from "./mermaid-render";
 import { renderLatexInElement } from "./latex-render";
 import { appendReferencesSection } from "./references";
 import inlineTheme from "./inline-theme";
+import { TITLE } from "@/constants/export";
 
 type ExportPngOptions = {
   desiredWidth?: number;
   fileNamePrefix?: string;
   backgroundColor?: string;
 };
+
+function getArticleTitle(
+  container: HTMLElement,
+  fallbackTitle: string,
+): string {
+  const h1Element = container.querySelector("h1");
+  const h1Text = h1Element?.textContent?.trim();
+  const prefix = h1Text || fallbackTitle;
+  return prefix.replace(/[<>:"/\\|?*]/g, "-").replace(/\s+/g, "-");
+}
+
+function buildExportFileName(
+  container: HTMLElement,
+  fallbackTitle: string,
+  extension: string,
+): string {
+  const cleanPrefix = getArticleTitle(container, fallbackTitle);
+  const timestamp = new Date()
+    .toISOString()
+    .slice(0, 19)
+    .replace(/[:T]/g, "-");
+  const normalizedExt = extension.startsWith(".")
+    ? extension.slice(1)
+    : extension;
+  return `${cleanPrefix}-${timestamp}.${normalizedExt}`;
+}
 
 async function renderDynamicContent(container: HTMLElement): Promise<void> {
   renderLatexInElement(container);
@@ -67,15 +94,12 @@ export async function exportPreviewToPng(
     backgroundColor,
   });
 
-  const h1Element = container.querySelector("h1");
-  const h1Text = h1Element?.textContent?.trim();
-
-  const prefix = h1Text || options.fileNamePrefix || "markdown-preview";
-
-  const cleanPrefix = prefix.replace(/[<>:"/\\|?*]/g, "-").replace(/\s+/g, "-");
-
   const link = document.createElement("a");
-  link.download = `${cleanPrefix}-${new Date().toISOString().slice(0, 19).replace(/[:T]/g, "-")}.png`;
+  link.download = buildExportFileName(
+    container,
+    options.fileNamePrefix || TITLE,
+    "png",
+  );
   link.href = dataUrl;
   link.click();
 }
