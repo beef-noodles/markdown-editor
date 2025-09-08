@@ -3,7 +3,7 @@ import { renderMermaid } from "./mermaid-render";
 import { renderLatexInElement } from "./latex-render";
 import { appendReferencesSection } from "./references";
 import inlineTheme from "./inline-theme";
-import { TITLE } from "@/constants/export";
+import { TITLE } from "@/constants/config";
 
 type ExportPngOptions = {
   desiredWidth?: number;
