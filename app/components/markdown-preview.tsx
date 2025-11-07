@@ -1,7 +1,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { Button } from "./ui/button";
-import { copyPreviewToClipboard, exportPreviewToPng } from '../lib/preview-utils';
+import { copyPreviewToClipboard, exportPreviewToPdf, exportPreviewToPng } from '../lib/preview-utils';
 import { renderMermaid } from '../lib/mermaid-render';
 import { renderLatexInElement } from '../lib/latex-render';
 import { appendReferencesSection } from '../lib/references';
@@ -15,7 +15,8 @@ interface Props {
 export const MarkdownPreview = ({ innerHTML }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const [copied, setCopied] = useState(false);
-  const [exporting, setExporting] = useState(false);
+  const [exportingPNG, setExportingPNG] = useState(false);
+  const [exportingPDF, setExportingPDF] = useState(false);
 
 
   useEffect(() => {
@@ -40,12 +41,24 @@ export const MarkdownPreview = ({ innerHTML }: Props) => {
   const handleExport = async () => {
     if (!ref.current) return;
     try {
-      setExporting(true);
+      setExportingPNG(true);
       await exportPreviewToPng(ref.current);
     } catch (e) {
       console.error('Failed to export image', e);
     } finally {
-      setExporting(false);
+      setExportingPNG(false);
+    }
+  }
+
+    const handleExportPDF = async () => {
+    if (!ref.current) return;
+    try {
+      setExportingPDF(true);
+      await exportPreviewToPdf(ref.current);
+    } catch (e) {
+      console.error('Failed to export image', e);
+    } finally {
+      setExportingPDF(false);
     }
   }
 
@@ -63,11 +76,19 @@ export const MarkdownPreview = ({ innerHTML }: Props) => {
         </Button>
         <Button
           onClick={handleExport}
-          disabled={exporting}
+          disabled={exportingPNG}
           className="px-4 py-2 rounded bg-primary text-primary-foreground shadow-lg hover:bg-primary/80 transition-all disabled:opacity-60"
           style={{ pointerEvents: 'auto' }}
         >
-          {exporting ? 'Exporting…' : 'Export PNG'}
+          {exportingPNG ? 'Exporting…' : 'Export PNG'}
+        </Button>
+        <Button
+          onClick={handleExportPDF}
+          disabled={exportingPDF}
+          className="px-4 py-2 rounded bg-primary text-primary-foreground shadow-lg hover:bg-primary/80 transition-all disabled:opacity-60"
+          style={{ pointerEvents: 'auto' }}
+        >
+          {exportingPNG ? 'Exporting…' : 'Export PDF'}
         </Button>
       </div>
     </>
