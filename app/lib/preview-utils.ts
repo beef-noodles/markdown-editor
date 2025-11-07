@@ -94,12 +94,16 @@ export async function exportPreviewToPng(
     backgroundColor,
   });
 
-  const link = document.createElement("a");
-  link.download = buildExportFileName(
+  download(buildExportFileName(
     container,
     options.fileNamePrefix || TITLE,
-    "png",
-  );
-  link.href = dataUrl;
+    "png"
+  ), dataUrl);
+}
+
+function download(downloadName: string, downloadContent: string) {
+  const link = document.createElement("a");
+  link.download = downloadName;
+  link.href = downloadContent;
   link.click();
 }
