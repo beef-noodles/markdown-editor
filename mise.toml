@@ -1,0 +1,9 @@
+[tools]
+rust = { version = "1.91.0", targets = "wasm32-unknown-unknown" }
+node = "25.0.0"
+pnpm = "10.20.0"
+pre-commit = "4.3.0"
+
+[hooks]
+preinstall = "echo 'I am about to install tools'"
+postinstall = "echo 'I just installed tools'"
