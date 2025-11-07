@@ -18,8 +18,10 @@ Just focus on creating your content, **Markdown Editor** will convert it to \`em
 
 | Format    | Description                                              | Scenario                          |
 |-----------|----------------------------------------------------------|-----------------------------------|
-| 🖼️ Image | Generate shareable images from Markdown                  | Social media sharing              |
 | 📧 Email  | Create content that can be embedded directly into emails | Newsletters, article sharing      |
+| 🖼️ Image | Generate shareable images from Markdown                   | Social media sharing              |
+| 🖼️ PDF | Generate shareable PDF from Markdown                        | Work sharing              |
+
 
 
 \`\`\`ts
