@@ -88,7 +88,7 @@ export const MarkdownPreview = ({ innerHTML }: Props) => {
           className="px-4 py-2 rounded bg-primary text-primary-foreground shadow-lg hover:bg-primary/80 transition-all disabled:opacity-60"
           style={{ pointerEvents: 'auto' }}
         >
-          {exportingPNG ? 'Exporting…' : 'Export PDF'}
+          {exportingPDF ? 'Exporting…' : 'Export PDF'}
         </Button>
       </div>
     </>
